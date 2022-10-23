@@ -548,3 +548,4 @@ __attribute__((weak)) void SPI_ApplicationEventCallback(SPI_Handle_t *pSPIHandle
 }
 
 
+//teste de alteração
