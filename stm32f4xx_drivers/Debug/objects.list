@@ -1,0 +1,5 @@
+"./Src/014i2c_disciple_tx_string.o"
+"./Startup/startup_stm32f407vgtx.o"
+"./drivers/Src/stm32f407xx_gpio_driver.o"
+"./drivers/Src/stm32f407xx_i2c_driver.o"
+"./drivers/Src/stm32f407xx_spi_driver.o"

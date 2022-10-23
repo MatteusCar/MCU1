@@ -1,0 +1,61 @@
+/*
+ * stm32f407xx_gpio_driver.h
+ *
+ *  Created on: Jan 17, 2022
+ *      Author: matte
+ */
+
+#ifndef INC_STM32F407XX_GPIO_DRIVER_H_
+#define INC_STM32F407XX_GPIO_DRIVER_H_
+
+#include "stm32f407xx.h"
+
+typedef struct{
+	uint8_t GPIO_PinNumber;
+	uint8_t GPIO_PinMode;
+	uint8_t GPIO_PinSpeed;
+	uint8_t GPIO_PinPuPdControl;
+	uint8_t GPIO_PinOPType;
+	uint8_t GPIO_AltFunMode;
+}GPIO_PinConfig_t;
+
+typedef struct
+{
+	GPIO_RegDef_t *pGPIOx;                    //ponteiro para acesso rápido à GPIOx em questão, ex: pGPIOx = GPIOA
+	GPIO_PinConfig_t GPIO_PinConfig;          //faz pGPOIx apontar para o endereço do GPIOA (seu base Address)
+						                      //então pGPIOx -> MODER = 25 já acessa direto o registrador MODER da GPIOA
+}GPIO_Handle_t;
+
+/*
+ * Init and De-Init
+ */
+void init(GPIO_Handle_t *pGPIOHandle);        //O usuario vai instanciar uma struct do tipo GPIO_Handle_t e vai configurar e passar como parametro para inicialização
+void deInit(GPIO_Handle_t *pGPIOHandle);
+
+/*
+ * Peripheral Clock Setup
+ */
+void PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t En); //dado um base address de uma GPIO a gente habilita ou desabilita seu clock
+														  //En = 1 habilita, En = 0 desabilita
+/*
+ * Read and Write
+ */
+void ReadFromInputPin(void);
+void ReadFromInputPort(void);
+void WriteFromInputPin(void);
+void WriteFromInputPort(void);
+
+/*
+ * Interrupt Service Routine (ISR) Handling and Interrupt Routine Queue Configuration
+ */
+void ToggleOutputPin(void);
+void IRQConfig(void);
+
+
+
+
+
+
+
+
+#endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

@@ -1,0 +1,57 @@
+/*
+ * stm32f407xx_gpio_driver.c
+ *
+ *  Created on: Jan 17, 2022
+ *      Author: matte
+ */
+
+
+/*
+ * Init and De-Init
+ */
+void init(GPIO_Handle_t *pGPIOHandle);
+void deInit(GPIO_RegDef_t *pGPIOx);
+
+/*
+ * Peripheral Clock Setup
+ */
+void PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t En)
+{
+	if(En == ENABLE){
+		if(pGPIO == GPIOA)          GPIOA_PCLOCK_EN();
+		else if (pGPIO == GPIOB)	GPIOB_PCLOCK_EN();
+		else if (pGPIO == GPIOC)	GPIOC_PCLOCK_EN();
+		else if (pGPIO == GPIOD)	GPIOD_PCLOCK_EN();
+		else if (pGPIO == GPIOE)	GPIOE_PCLOCK_EN();
+		else if (pGPIO == GPIOF)	GPIOF_PCLOCK_EN();
+		else if (pGPIO == GPIOG)	GPIOG_PCLOCK_EN();
+		else if (pGPIO == GPIOH)	GPIOH_PCLOCK_EN();
+		else if (pGPIO == GPIOI)	GPIOI_PCLOCK_EN();
+	}
+
+	else{
+		if(pGPIO == GPIOA)          GPIOA_PCLOCK_DI();
+		else if (pGPIO == GPIOB)	GPIOB_PCLOCK_DI();
+		else if (pGPIO == GPIOC)	GPIOC_PCLOCK_DI();
+		else if (pGPIO == GPIOD)	GPIOD_PCLOCK_DI();
+		else if (pGPIO == GPIOE)	GPIOE_PCLOCK_DI();
+		else if (pGPIO == GPIOF)	GPIOF_PCLOCK_DI();
+		else if (pGPIO == GPIOG)	GPIOG_PCLOCK_DI();
+		else if (pGPIO == GPIOH)	GPIOH_PCLOCK_DI();
+		else if (pGPIO == GPIOI)	GPIOI_PCLOCK_DI();
+	}
+}
+/*
+ * Read and Write
+ */
+uint8_t ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t pin);
+uint16_t ReadFromInputPort(GPIO_RegDef_t *pGPIOx);
+void WriteFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t pin, uint8_t value);
+void WriteFromInputPort(GPIO_RegDef_t *pGPIOx, uint16_t value);
+void ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t pin);
+
+/*
+ * Interrupt Service Routine (ISR) Handling and Interrupt Routine Queue Configuration
+ */
+void GPIO_IRQConfig(uint8_t IRQnumber, uint8_t IRQpriority, uint8_t  IRQEn);
+void GPIO_IRQHandler(uint8_t pin);                                               //Interrupção externa ativda por esse pino será gerenciada

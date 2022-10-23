@@ -1,0 +1,20 @@
+/*
+ * stm32f407xx_gpio_driver.h
+ *
+ *  Created on: Jan 17, 2022
+ *      Author: matte
+ */
+
+#ifndef INC_STM32F407XX_GPIO_DRIVER_H_
+#define INC_STM32F407XX_GPIO_DRIVER_H_
+
+#include "stm32f407xx.h"
+
+typedef struct
+{
+	GPIO_RegDef_t *pGPIOx; //ponteiro para acesso rápido à GPIOx em questão, ex: pGPIOx = GPIOA
+						   //pGPOIx está apontando para o endereço do GPIOA
+						   //então pGPIOx -> MODER = 25 já acessa direto o registrador MODER da GPIOA
+};
+
+#endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

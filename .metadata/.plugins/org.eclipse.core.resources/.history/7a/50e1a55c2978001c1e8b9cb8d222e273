@@ -1,0 +1,73 @@
+/*
+ * stm32f407xx_gpio_driver.h
+ *
+ *  Created on: Jan 17, 2022
+ *      Author: matte
+ */
+
+#ifndef INC_STM32F407XX_GPIO_DRIVER_H_
+#define INC_STM32F407XX_GPIO_DRIVER_H_
+
+#include "stm32f407xx.h"
+
+typedef struct{
+	uint8_t GPIO_PinNumber;
+	uint8_t GPIO_PinMode;
+	uint8_t GPIO_PinSpeed;
+	uint8_t GPIO_PinPuPdControl;
+	uint8_t GPIO_PinOPType;
+	uint8_t GPIO_AltFunMode;
+}GPIO_PinConfig_t;
+
+typedef struct
+{
+	GPIO_RegDef_t *pGPIOx;                    //ponteiro para acesso rápido à GPIOx em questão, ex: pGPIOx = GPIOA
+	GPIO_PinConfig_t GPIO_PinConfig;          //faz pGPOIx apontar para o endereço do GPIOA (seu base Address)
+						                      //então pGPIOx -> MODER = 25 já acessa direto o registrador MODER da GPIOA
+}GPIO_Handle_t;
+
+/*
+ * Init and De-Init
+ */
+void init(GPIO_Handle_t *pGPIOHandle);        //O usuario vai instanciar uma struct do tipo GPIO_Handle_t e vai configurar e passar como parametro para inicialização
+void deInit(GPIO_RegDef_t *pGPIOx);
+
+/*
+ * Peripheral Clock Setup
+ */
+void PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t En);                        //dado um base address de uma GPIO a gente habilita ou desabilita seu clock
+														                         //En = 1 habilita, En = 0 desabilita
+/*
+ * Read and Write
+ */
+uint8_t ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t pin);                    //primeiro parametro diz qual GPIOx, e o segundo diz qual pino desse GPIOx
+uint16_t ReadFromInputPort(GPIO_RegDef_t *pGPIOx);                               //aqui vai retornar 16 bits ou seja, o valor de cada porta da GPIOx
+void WriteFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t pin, uint8_t value);       //value = 0 ou 1
+void WriteFromInputPort(GPIO_RegDef_t *pGPIOx, uint16_t value);
+void ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t pin);
+
+/*
+ * Interrupt Service Routine (ISR) Handling and Interrupt Routine Queue Configuration
+ */
+void GPIO_IRQConfig(uint8_t IRQnumber, uint8_t IRQpriority, uint8_t  IRQEn);
+void GPIO_IRQHandler(uint8_t pin);                                               //Interrupção externa ativda por esse pino será gerenciada
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

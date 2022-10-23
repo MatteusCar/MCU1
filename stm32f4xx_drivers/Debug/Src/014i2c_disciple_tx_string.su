@@ -1,0 +1,8 @@
+../Src/014i2c_disciple_tx_string.c:27:6:delay	16	static
+../Src/014i2c_disciple_tx_string.c:42:6:I2C1_GPIOInits	24	static
+../Src/014i2c_disciple_tx_string.c:65:6:I2C1_Inits	8	static
+../Src/014i2c_disciple_tx_string.c:77:6:GPIO_ButtonInit	24	static
+../Src/014i2c_disciple_tx_string.c:93:5:main	8	static
+../Src/014i2c_disciple_tx_string.c:132:6:I2C1_EV_IRQHandler	8	static
+../Src/014i2c_disciple_tx_string.c:138:6:I2C1_ER_IRQHandler	8	static
+../Src/014i2c_disciple_tx_string.c:161:6:I2C_ApplicationEventCallback	16	static
